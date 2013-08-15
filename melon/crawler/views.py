@@ -80,7 +80,7 @@ def crawl(request):
 				)
 
 				if site:
-					delete_side_by_id(site.id)
+					delete_site_by_id(site.id)
 					site.user = request.user
 					site.title = page_title
 					site.url = post_url
@@ -212,7 +212,7 @@ def crawl(request):
 	return HttpResponseRedirect('/my_account')
 
 #delete a site by id not by request.
-def delete_side_by_id(site_id):
+def delete_site_by_id(site_id):
 	site_entry = site_url.objects.get(
 		id=site_id
 	)

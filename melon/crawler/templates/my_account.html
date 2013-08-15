@@ -58,5 +58,11 @@
 	</div>
 	<div class="offset"></div>
 	</div>
-
+<script>
+	jQuery(document).ready(function() {
+		jQuery('form').on('submit', function(){
+		    jQuery(this).find('input[type=submit]').attr('disabled', 'disabled');
+		});
+	});
+</script>
 {% include 'footer.html' %}
