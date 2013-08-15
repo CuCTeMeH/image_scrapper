@@ -1,0 +1,12 @@
+{% if logged_users %}
+<div class="green">
+	Logged user at the moment:
+	<ul class="user-list">
+	    {% for user in logged_users %}
+	    <li>{{ user }}</li>
+	    {% endfor %}
+	</ul>
+	<div>Number of added URLs: {{ urls_count }}</div>
+	<div>Congratilations you have more images than {{ percentage|floatformat:2 }}% of the users.</div>
+</div>
+{% endif %}

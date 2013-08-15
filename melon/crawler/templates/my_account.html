@@ -1,0 +1,62 @@
+{% include 'header.html' %}
+
+<div class="content">
+{% load get_logged %}
+{% load image_tags %}
+<div class="logout">
+	<input class="btn-small" type="submit" value="Log out!" onclick="location.href='/accounts/logout';">
+</div>
+	<h2>My Account</h2>
+	{% render_logged_in_user_list user %}
+	<div class="row">
+	<div class="span100">
+		<form action='/my_account/crawl/' method='post'>{% csrf_token %}
+			<div>
+				<label>Enter URL</label>
+				<input class="long" name="url" type="text">
+				<input class="btn-small" type="submit" value="Go!">
+			</div>
+		</form>
+	</div>
+	</div>
+
+	<div class="row">
+	{% for image in images %}
+			<div class="span50">
+				<form action='/my_account/crawl/' method='post'>{% csrf_token %}
+					<input type="hidden" name="url" value="{{ image.url.url }}"/>
+					<input class="btn-small" type="submit" value="Sync"/>
+				</form>
+					<p><a href="/my_account/delete_site?id={{ image.url.id }}">Delete site - {{ image.url.url|truncatechars:30 }}</a></p>
+			</div>
+			<div class="span25">
+				<p>{{ image.url.title|truncatechars:30 }}</p>
+			</div>
+			<div class="span25">
+				<div class="thumb">
+					<a class="delete_image" href="/my_account/delete_image?id={{ image.id }}" ><img width="30px" height="30px" src="/static/images/img/del.png"/></a>
+					<img src="{{ image.image_url|crop:"100x100" }}"/>
+				</div>
+				</div>
+			
+	{% endfor %}
+	</div>
+		<div class="pagination">
+	    <span class="step-links">
+	        {% if images.has_previous %}
+	            <a href="?page={{ images.previous_page_number }}">previous</a>
+	        {% endif %}
+
+	        <span class="current">
+	            Page {{ images.number }} of {{ images.paginator.num_pages }}.
+	        </span>
+
+	        {% if images.has_next %}
+	            <a href="?page={{ images.next_page_number }}">next</a>
+	        {% endif %}
+	    </span>
+	</div>
+	<div class="offset"></div>
+	</div>
+
+{% include 'footer.html' %}

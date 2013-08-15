@@ -1,0 +1,27 @@
+{% include 'header.html' %}
+<link rel="stylesheet" href="/static/js/colorbox/colorbox.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/static/js/colorbox/jquery.colorbox-min.js"></script>
+<script>
+jQuery(document).ready(function(){
+	//Examples of how to assign the Colorbox event to elements
+	jQuery(".group").colorbox({
+		scalePhotos: true,
+		width: '800px',
+		height: '600px',
+		rel:'group'});
+});
+</script>
+<div class="content">
+<div class="row">
+{% load get_logged %}
+{% render_logged_in_user_list user %}
+{% load image_tags %}
+	{% for image in images_lists %}
+		<a class="group cboxElement" href="{{ image.image_url|crop:"800x600" }}"><img src='{{ image.image_url|crop:"100x100" }}' title="{{ image.title }}" /></a>
+	{% endfor %}
+</div>
+<div class="offset"></div>
+</div>
+
+{% include 'footer.html' %}

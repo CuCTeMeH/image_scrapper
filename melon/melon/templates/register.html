@@ -1,0 +1,43 @@
+{% include 'header.html' %}
+
+{% block content %}
+<div class="content">
+	<div class= "row">
+		<div class="login span50">
+			<h2>Login</h2>
+			{% if error == 1 %}
+			    <p>Your login is incorrect, please try again.</p>
+			{% endif %}
+			
+			<form action='/accounts/login/' method='post'>{% csrf_token %}
+				<input type="hidden" name="form_name" value="login">
+				<div class="username">
+					<label for='username'>User name:</label>
+					<input type='text' name='username' value='' id='username'/>
+				</div>
+
+				<div class="password">
+					<label for='password'>Password:</label>
+					<input type='password' name='password' value='' id='password'/>
+				</div>
+
+				<input type='submit' value='Login' />
+			</form>
+		</div>
+		<div class="register span50">
+			<h2>Register</h2>
+			{% if registered %}
+			    <p>User '{{ registered }}' have been created please login.</p>
+			{% endif %}
+			<form action="/" method='post'> {% csrf_token %}
+				<input type="hidden" name="form_name" value="register">
+				{{form}}
+
+				<input type='submit' value="Register"/>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% include 'footer.html' %}

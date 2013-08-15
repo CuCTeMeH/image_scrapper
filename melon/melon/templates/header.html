@@ -1,0 +1,28 @@
+
+<html>
+<head>
+    <title>Melon Crawler</title>
+    {% load staticfiles %}
+    <link type="text/css" rel="Stylesheet" href="/static/css/style.css">
+</head>
+<div id="header">
+<div class="wrapper">
+		<a id="logo" href="/" class="left"><img src="/static/images/img/logo.png" alt="melon"></a>
+    {% if  current_path != '/' %}
+        <div class="navigation">
+                
+                        <ul> 
+                        <li>
+                            <a href="/my_account/">Profile</a>
+                        </li>
+                    
+                        <li>
+                            <a href="/my_account/gallery/">Gallery</a>
+                        </li>
+                        </ul>
+
+        </div>
+    {% endif %}
+		<!-- .navigation -->
+    </div>
+	</div>

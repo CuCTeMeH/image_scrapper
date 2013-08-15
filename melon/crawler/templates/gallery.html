@@ -1,0 +1,29 @@
+{% include 'header.html' %}
+<div class="content">
+<div class="row">
+{% load get_logged %}
+{% render_logged_in_user_list user %}
+	{% for site_url in site_urls %}
+		<div>
+	    	<a href="/my_account/gallery/inner?id={{ site_url.id }}">{{ site_url.title }}</a> - <a href="{{ site_url.url}}">{{ site_url.url}}</a>
+	    </div>
+	{% endfor %}
+
+	<div class="pagination">
+	    <span class="step-links">
+	        {% if site_urls.has_previous %}
+	            <a href="?page={{ site_urls.previous_page_number }}">previous</a>
+	        {% endif %}
+
+	        <span class="current">
+	            Page {{ site_urls.number }} of {{ site_urls.paginator.num_pages }}.
+	        </span>
+
+	        {% if site_urls.has_next %}
+	            <a href="?page={{ site_urls.next_page_number }}">next</a>
+	        {% endif %}
+	    </span>
+	</div>
+</div>
+</div>
+{% include 'footer.html' %}
